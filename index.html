@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es-AR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Golf Performance Tracker</title>
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/charts.css" />
+</head>
+<body>
+  <!-- Pantalla de login/registro. app.js decide cuándo mostrarla vs. la app real. -->
+  <div id="auth-gate" hidden></div>
+
+  <div class="app-shell" id="app-shell" hidden>
+
+    <!-- Fondo oscuro detrás del drawer en mobile -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- Sidebar (desktop fijo / drawer en mobile, mismo contenido en los dos) -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <div class="sidebar__brand-mark"></div>
+        <span class="sidebar__brand-text">Golf Tracker</span>
+      </div>
+
+      <nav id="sidebar-nav" aria-label="Navegación principal"></nav>
+
+      <div class="sidebar__footer" id="sidebar-footer"></div>
+    </aside>
+
+    <!-- Área principal -->
+    <div class="main">
+      <header class="topbar">
+        <div style="display:flex; align-items:center; gap: var(--space-3);">
+          <button class="btn btn--icon hamburger-btn" id="btn-hamburger" aria-label="Abrir menú">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+          <h1 class="topbar__title" id="topbar-title">Dashboard</h1>
+        </div>
+        <div class="topbar__actions">
+          <!-- Espacio reservado para acciones contextuales por vista -->
+        </div>
+      </header>
+
+      <main id="view-root" class="view" aria-live="polite"></main>
+    </div>
+
+  </div>
+
+  <!--
+    Scripts clásicos (NO type="module") a propósito: Chrome/Edge
+    bloquean los ES Modules por CORS al abrir el archivo con doble
+    clic (file://). Cada archivo se registra en el namespace global
+    window.GT. El orden importa: core primero, módulos después, y
+    app.js al final porque arma la navegación y hace boot().
+
+    supabase.js está vendorizado localmente (assets/vendor) en vez
+    de venir de un CDN, para no depender de la disponibilidad de un
+    tercero en producción. Si config.js queda vacío, la app arranca
+    en modo local (sin login) exactamente como en etapas anteriores.
+  -->
+  <script src="assets/vendor/supabase.js"></script>
+  <script src="js/core/config.js"></script>
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/db-schema.js"></script>
+  <script src="js/core/auth.js"></script>
+  <script src="js/core/storage.js"></script>
+  <script src="js/engine/training-engine.js"></script>
+  <script src="js/engine/stats-engine.js"></script>
+  <script src="js/engine/confidence.js"></script>
+  <script src="js/backup/backup.js"></script>
+
+  <script src="js/modules/auth-gate.js"></script>
+  <script src="js/modules/dashboard.js"></script>
+  <script src="js/modules/entrenamiento-palos.js"></script>
+  <script src="js/modules/rounds.js"></script>
+  <script src="js/modules/course-mode.js"></script>
+  <script src="js/modules/range-mode.js"></script>
+  <script src="js/modules/bag.js"></script>
+  <script src="js/modules/distances.js"></script>
+  <script src="js/modules/goals.js"></script>
+  <script src="js/modules/records.js"></script>
+  <script src="js/modules/planner.js"></script>
+  <script src="js/modules/settings.js"></script>
+
+  <script src="js/core/app.js"></script>
+</body>
+</html>
